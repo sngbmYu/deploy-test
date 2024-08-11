@@ -48,8 +48,8 @@ jobs:
       - name: Deploy to EC2 via SSH
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/leafy-backend:${{ github.sha }}
-            docker stop leafy-backend || true
-            docker rm leafy-backend || true
-            docker run -d --name leafy-backend -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/leafy-backend:${{ github.sha }}
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ustock-backend:${{ github.sha }}
+            docker stop ustock-backend || true
+            docker rm ustock-backend || true
+            docker run -d --name ustock-backend -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/ustock-backend:${{ github.sha }}
           EOF
