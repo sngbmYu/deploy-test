@@ -44,6 +44,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          eb init -p "Corretto 17 running on 64bit Amazon Linux 2" -r $AWS_REGION ustock
-          eb use ustock
+          eb init -p "Corretto 17 running on 64bit Amazon Linux 2" -r $AWS_REGION --interactive
+          eb use ustock-backend
           eb deploy --staged
