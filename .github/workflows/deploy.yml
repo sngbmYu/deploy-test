@@ -90,8 +90,8 @@ jobs:
               echo "Deploying to $TARGET_ENV environment"
             
               export TAG=${{ steps.current-time.outputs.formattedTime }}
-              docker-compose -f ./docker-compose.$TARGET_ENV.yml pull sngbmyu/ustock-backend:${{ steps.current-time.outputs.formattedTime }}
-              docker-compose -f ./docker-compose.$TARGET_ENV.yml up -d
+              docker compose -f ./docker-compose.$TARGET_ENV.yml pull sngbmyu/ustock-backend:${{ steps.current-time.outputs.formattedTime }}
+              docker compose -f ./docker-compose.$TARGET_ENV.yml up -d
             
               sed -i "s/$CURRENT_ENV/$TARGET_ENV/" /etc/nginx/conf.d/default.conf
               nginx -s reload
