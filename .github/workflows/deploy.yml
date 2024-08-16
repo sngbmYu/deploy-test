@@ -64,7 +64,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret_access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
 
       - name: Add Github Actions IP to Security Group
@@ -79,7 +79,7 @@ jobs:
       - name: Deploy to Blue/Green environment
         run: |
             ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} << 'EOF'
-              CURRENT_ENV=$(curl -s http://${{ secrets.NGINX_ADDRESS }} | grep -o 'blue\|green')
+              CURRENT_ENV=$(curl -s ${{ secrets.NGINX_ADDRESS }} | grep -o 'blue\|green')
             
               if [ "$CURRENT_ENV" == "blue" ]; then
                 TARGET_ENV="green"
