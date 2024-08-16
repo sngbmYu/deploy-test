@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  app:
+    image: sngbmyu/ustock-backend:${TAG}
+    container_name: ustock_blue
+    ports:
+      - "8081:8080"
+    networks:
+      - ustock-network
+
+networks:
+  ustock-network:
+    driver: bridge
