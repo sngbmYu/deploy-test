@@ -79,7 +79,7 @@ jobs:
       - name: Deploy to Blue/Green environment
         run: |
             ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} << 'EOF'
-              CURRENT_ENV=$(curl -s ${{ secrets.AWS_HOST }} | grep -o 'blue\|green')
+              CURRENT_ENV=$(curl -s http://${{ secrets.AWS_HOST }} | grep -o 'blue\|green')
             
               if [ "$CURRENT_ENV" == "blue" ]; then
                 TARGET_ENV="green"
