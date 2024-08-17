@@ -70,6 +70,9 @@ jobs:
       - name: Pull Image from Docker Hub
         run: docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ustock-backend:${{ needs.build-and-push.outputs.build_time }}
 
+      - name: Show Secret
+        run: echo "${{ secrets.DOCKER_COMPOSE_BLUE_PATH }}"
+
       - name: Update docker-compose.yml with TAG
         run: |
           sed -i "s|ustock-backend:.*|ustock-backend:${{ needs.build-and-push.outputs.build_time }}|" ${{ secrets.DOCKER_COMPOSE_BLUE_PATH }}
